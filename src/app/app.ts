@@ -19,6 +19,7 @@ import { WidgetComponent } from './component/widget.component';
       <ng-container #container />
       <section class="toolbar">
         <button (click)="createComponent()" class="create">Create Component</button>
+        <button (click)="destroyComponent()" class="destroy">Destroy Component</button>
       </section>
     </main>`,
   styleUrl: './app.scss'
@@ -30,7 +31,7 @@ export class App {
   private vcr: Signal<ViewContainerRef> = viewChild.required('container', { read: ViewContainerRef });
 
   createComponent() {
-    const refContainer: ComponentRef<WidgetComponent> = this.vcr().createComponent(WidgetComponent, {
+    this.vcr().createComponent(WidgetComponent, {
       bindings: [
         // устанавливаем инпуты для динамического компонента
         inputBinding('title', () => 'Weather'),
@@ -46,7 +47,6 @@ export class App {
       ],
       directives: [// сюда вставляем директивы
         // MyDirective, - директива без инпутов
-
         // { - директива с инпутами
         //   type: DirectiveName - сама директива
         //   bindings: [
@@ -55,6 +55,10 @@ export class App {
         // }
       ]
     });
+  }
+
+  protected destroyComponent() {
+    this.vcr().clear();
   }
 
   protected setCompatMode() {

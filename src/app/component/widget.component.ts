@@ -8,6 +8,16 @@ import { Component, input, InputSignal, output } from "@angular/core";
     display: block;
     width: 80%;
   }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+
+    button {
+      margin: 0;
+    }
+  }
   `,
   template: `
     <div class="widget-header">
@@ -28,12 +38,12 @@ import { Component, input, InputSignal, output } from "@angular/core";
           Dolor dolorum error eveniet id numquam recusandae saepe totam ut voluptate.
           Ipsum, itaque nulla? Aperiam autem consequuntur eaque eius error fuga illo incidunt
           inventore ipsam, iure molestiae neque nisi odio placeat praesentium repellendus rerum unde?
-          <button style="margin-top: 16px" (click)="collapseFromComponent.emit(true)">Collapse text</button>
         </div>
 
       }
-      <div>
-        <button (click)="countChange.emit(this.count() + 1)">Change Count</button>
+      <div class="buttons">
+        <button class="create" (click)="collapseFromComponent.emit(!collapsed())">Collapse text</button>
+        <button class="create" (click)="countChange.emit(this.count() + 1)">Change Count</button>
       </div>
     </div>
   `,
